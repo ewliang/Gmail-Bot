@@ -22,7 +22,11 @@ Repository [https://github.com/ewliang/Gmail-Bot](https://github.com/ewliang/Gma
 
 ## Setup
 1. Go to [https://developers.google.com/gmail/api/quickstart/nodejs](https://developers.google.com/gmail/api/quickstart/nodejs) and follow the instructions to turn on your Gmail API for your Google Account.
-2. 
+2. Download your own credentials.json file.
+3. Clone this project via the URL provided in the repository section of this readme file at [Repository](#repository).
+4. Then navigate to the root directory of the project folder via your command line tool, and run "npm install".
+5. The credentials.json file you downloaded from step 2, drag and drop it into the project folder's root directory.
+6. 
 
 # Author
 Eric Liang
