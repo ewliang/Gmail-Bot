@@ -4,8 +4,8 @@ A simple Gmail bot I created in Node.js to help actively filter my emails. The m
 # Table Of Contents
 - [Repository](#repository)
 - [Requirements and Setup](#requirements-and-setup)
-+ [Requirements](#requirements)
-+ [Setup](#setup)
+  + [Requirements](#requirements)
+  + [Setup](#setup)
 - [Author](#author)
 - [License](#license)
 
