@@ -1,0 +1,2 @@
+# Gmail-Bot
+A simple Gmail bot I created in Node.js to help actively filter my emails. The motivation behind this project is due to the fact that some random recruiters don't bother looking at my resume which clearly states that I'm looking for a Frontend Web Developer position, not a Android Developer position. If I don't respond, they'll call me which wastes my time so I decided to make this bot to kindly turn them down.
