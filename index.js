@@ -112,17 +112,19 @@ function listMessages(auth) {
   });
 }
 
-// Gets a single message.
+// Get a single message - full content.
 function listMessage(auth, messageId) {
   const gmail = google.gmail({ version: 'v1', auth });
   gmail.users.messages.get({
     userId: 'me',
-    id: messageId
+    id: messageId,
+    format: 'full'
   }, (err, res) => {
     if(err) return console.log('The API returned an error: ' + err);
-    const msg = res.data;
-    if(msg.labelIds.includes("UNREAD")) {
-      console.log("ID: " + msg.id + '\n' + "MSG: " + msg.snippet + '\n\n');
+    const message = res.data;
+    if(message.labelIds.includes("UNREAD")) {
+      //console.log("ID: " + message.id + '\n' + "MSG: " + '\n\n');
+      console.log(new Buffer(message.payload.parts[0].body.data, 'base64').toString()); // parts[0] = text, parts[1] = html
     }
   });
 }
