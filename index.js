@@ -10,7 +10,8 @@ const TOKEN_PATH = 'token.json';
 fs.readFile('credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   // Authorize a client with credentials, then call the Gmail API.
-  authorize(JSON.parse(content), listLabels);
+  //authorize(JSON.parse(content), listLabels);
+  authorize(JSON.parse(content), listMessages);
 });
 
 /**
@@ -82,6 +83,46 @@ function listLabels(auth) {
       });
     } else {
       console.log('No labels found.');
+    }
+  });
+}
+
+// Get all messages (specifically all their IDs)
+function listMessages(auth) {
+  const gmail = google.gmail({ version: 'v1', auth });
+  gmail.users.messages.list({
+    userId: 'me',
+    maxResults: 10
+  }, (err, res) => {
+    if (err) return console.log('The API returned an error: ' + err);
+    const messages = res.data.messages;
+    if(messages.length) {
+      var messageIds = []; // Store all collected message IDs.
+      messages.forEach((message) => {
+        console.log(`- ${message.id}`);
+        messageIds.push(message.id);
+      });
+      // Loop through each message ID, and get back the actual message content.
+      for(let i = 0; i < messageIds.length; i++) {
+        listMessage(auth, messageIds[i]);
+      }
+    } else {
+      console.log('No messages found.');
+    }
+  });
+}
+
+// Gets a single message.
+function listMessage(auth, messageId) {
+  const gmail = google.gmail({ version: 'v1', auth });
+  gmail.users.messages.get({
+    userId: 'me',
+    id: messageId
+  }, (err, res) => {
+    if(err) return console.log('The API returned an error: ' + err);
+    const msg = res.data;
+    if(msg.labelIds.includes("UNREAD")) {
+      console.log("ID: " + msg.id + '\n' + "MSG: " + msg.snippet + '\n\n');
     }
   });
 }
